@@ -14,7 +14,7 @@ describe('DonutMaker object', ()=>{
         expect(underTest.getDonutCount()).toEqual(0);
     });
 
-    test('Does DonutMaker return 1 after 1 click', ()=>{
+    test('Does DonutMaker return 1 donut after 1 click', ()=>{
         const underTest = new DonutMaker;
         underTest.addDonuts(1);
         expect(underTest.getDonutCount()).toEqual(1);
@@ -61,7 +61,6 @@ describe('DonutMaker object', ()=>{
 
     test('Does isItemAffordable() return false when donutCount is under 100', ()=>{
         const underTest = new DonutMaker;
-        const cost = underTest.autoClickerCost;
         expect(underTest.isItemAffordable('autoClickers')).toEqual(false);
         underTest.addDonuts(99);
         expect(underTest.isItemAffordable('autoClickers')).toEqual(false);
@@ -129,5 +128,66 @@ describe('DonutMaker object', ()=>{
         expect(underTest.getDonutCount()).toEqual(15);
     });
 
-    
+    test('Does DonutMaker increase donutMultiplierCost by 10% after each purchase', ()=>{
+        const underTest = new DonutMaker;
+        underTest.addDonuts(500);
+        expect(underTest.getItemCost('donutMultipliers')).toEqual(10);
+        underTest.buyItem('donutMultipliers');
+        expect(underTest.getItemCost('donutMultipliers')).toEqual(11);
+        underTest.buyItem('donutMultipliers');
+        expect(underTest.getItemCost('donutMultipliers')).toEqual(12);
+        underTest.buyItem('donutMultipliers');
+        expect(underTest.getItemCost('donutMultipliers')).toEqual(13);
+    });
+
+    test('Does isItemAffordable() return false when donutCount is under 10', ()=>{
+        const underTest = new DonutMaker;
+        expect(underTest.isItemAffordable('donutMultipliers')).toEqual(false);
+        underTest.addDonuts(9);
+        expect(underTest.isItemAffordable('donutMultipliers')).toEqual(false);
+    });
+
+    test('Does isItemAffordable() return true when donutCount is 10 or more', ()=>{
+        const underTest = new DonutMaker;
+        underTest.addDonuts(10);
+        expect(underTest.isItemAffordable('donutMultipliers')).toEqual(true);
+        underTest.addDonuts(50);
+        expect(underTest.isItemAffordable('donutMultipliers')).toEqual(true);
+    });
+
+    test('Does DonutMaker return 0 donutMultipliers after purchase when under 10 donuts', ()=>{
+        const underTest = new DonutMaker;
+        underTest.buyItem('donutMultipliers');
+        expect(underTest.getItemCount('donutMultipliers')).toEqual(0);
+    });
+
+    test('Does DonutMaker return 6 donuts after 5 clicks with 1 donutMultiplier', ()=>{
+        const underTest = new DonutMaker;
+        underTest.addItems(1, 'donutMultipliers');
+        underTest.clickDonuts(5);
+        expect(underTest.getDonutCount()).toEqual(6);
+    });
+
+    test('Does DonutMaker return 10 donuts after 5 clicks with 4 donutMultipliers', ()=>{
+        const underTest = new DonutMaker;
+        underTest.addItems(4, 'donutMultipliers');
+        underTest.clickDonuts(5);
+        expect(underTest.getDonutCount()).toEqual(10);
+    });
+
+    test('Does DonutMaker return 6 donuts after activateAutoClickers with 1 donutMultiplier and 5 autoClickers', ()=>{
+        const underTest = new DonutMaker;
+        underTest.addItems(1, 'donutMultipliers');
+        underTest.addItems(5, 'autoClickers');
+        underTest.activateAutoClickers();
+        expect(underTest.getDonutCount()).toEqual(6);
+    });
+
+    test('Does DonutMaker return 10 donuts after activateAutoClickers clicks with 4 donutMultipliers and 5 autoClickers', ()=>{
+        const underTest = new DonutMaker;
+        underTest.addItems(4, 'donutMultipliers');
+        underTest.addItems(5, 'autoClickers');
+        underTest.activateAutoClickers();
+        expect(underTest.getDonutCount()).toEqual(10);
+    });
 });

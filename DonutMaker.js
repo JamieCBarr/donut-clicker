@@ -11,7 +11,8 @@ class DonutMaker{
     }
 
     clickDonuts(clicks){
-        this.addDonuts(clicks);
+        let multiplier = Math.pow(1.2, this.getItemCount('donutMultipliers'));
+        this.addDonuts(clicks * multiplier);
     }
 
     getDonutCount(){
