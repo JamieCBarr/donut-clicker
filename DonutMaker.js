@@ -2,49 +2,79 @@ class DonutMaker{
 
     constructor(){
         this.donutCount = 0.0;
-        this.autoClickerCount = 0;
-        this.autoClickerCost = 100;
-        this.autoClickerCostMult = 0.1;
-        this.donutMultiplierCount = 0;
+        this.autoClickers = new purchasableItem('autoClicker', 100, 0.1)
+        this.donutMultipliers = new purchasableItem('donutMultiplier', 10, 0.1)
     }
 
-    addDonuts(clicks){
-        this.donutCount += clicks;
+    addDonuts(numToAdd){
+        this.donutCount += numToAdd;
+    }
+
+    clickDonuts(clicks){
+        this.addDonuts(clicks);
     }
 
     getDonutCount(){
         return Math.floor(this.donutCount);
     }
 
-    addAutoClickers(numToAdd){
-        this.autoClickerCount += numToAdd;
+    addItems(numToAdd, item){
+        this[item].addItems(numToAdd);
     }
 
-    buyAutoClicker(){
-        if (this.isAffordable(this.autoClickerCost)){
-        this.donutCount -= this.autoClickerCost;
-        let costIncrease = Math.floor(this.autoClickerCost * this.autoClickerCostMult);
-        this.autoClickerCost += costIncrease;
-        this.addAutoClickers(1);
-        }
+    buyItem(item){
+        this.donutCount -= this[item].buyItemFor(this.donutCount);
+    }
+
+    getItemCount(item){
+        return this[item].count;
+    }
+
+    getItemCost(item){
+        return this[item].cost;
+    }
+
+    getItemCostMult(item){
+        return this[item].costMult;
+    }
+
+    isItemAffordable(item){
+        return this[item].isAffordableFor(this.donutCount);
     }
 
     activateAutoClickers(){
-        this.addDonuts(this.autoClickerCount);
+        this.clickDonuts(this.getItemCount('autoClickers'));
+    }
+}
+
+
+class purchasableItem{
+
+    constructor(name, startingCost, costMult){
+        this.name = name;
+        this.count = 0;
+        this.cost = startingCost;
+        this.costMult = costMult;
     }
 
-    addDonutMultipliers(numToAdd){
-        this.donutMultiplierCount += numToAdd;
+    addItems(numToAdd){
+        this.count += numToAdd;
     }
 
-    buyDonutMultiplier(){
-        this.donutCount -= 10;
-        this.addDonutMultipliers(1);
-    }
-
-    isAffordable(cost){
-        return this.donutCount >= cost;
-    }
+    buyItemFor(donutCount){
+        let donutCost = 0;
+        if (this.isAffordableFor(donutCount)){
+        donutCost = this.cost;
+        let costIncrease = Math.floor(this.cost * this.costMult);
+        this.cost += costIncrease;
+        this.addItems(1);
+        }
+        return donutCost;
+    }    
+    
+    isAffordableFor(donutCount){
+        return donutCount >= this.cost;
+    }    
 }
 
 export default DonutMaker;
