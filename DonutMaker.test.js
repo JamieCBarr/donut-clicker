@@ -100,4 +100,29 @@ describe('DonutMaker object', ()=>{
         underTest.activateAutoClickers();
         expect(underTest.getDonutCount()).toEqual(5);
     });
+
+    test('Does DonutMaker return a donutMultiplierCount', ()=>{
+        const underTest = new DonutMaker;
+        expect(typeof underTest.donutMultiplierCount).toMatch('number');
+    });
+
+    test('Does DonutMaker return a donutMultiplierCount of 0', ()=>{
+        const underTest = new DonutMaker;
+        expect(underTest.donutMultiplierCount).toEqual(0);
+    });
+
+    test('Does DonutMaker return 1 donutMultiplier after 1 purchase', ()=>{
+        const underTest = new DonutMaker;
+        underTest.addDonutMultipliers(1);
+        expect(underTest.donutMultiplierCount).toEqual(1);
+    });
+
+    test('Does DonutMaker return 15 donuts after donutMultiplier purchase', ()=>{
+        const underTest = new DonutMaker;
+        underTest.addDonuts(25);
+        expect(underTest.getDonutCount()).toEqual(25);
+        underTest.buyDonutMultiplier();
+        expect(underTest.donutMultiplierCount).toEqual(1);
+        expect(underTest.getDonutCount()).toEqual(15);
+    });
 });

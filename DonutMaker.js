@@ -5,6 +5,7 @@ class DonutMaker{
         this.autoClickerCount = 0;
         this.autoClickerCost = 100;
         this.autoClickerCostMult = 0.1;
+        this.donutMultiplierCount = 0;
     }
 
     addDonuts(clicks){
@@ -30,6 +31,15 @@ class DonutMaker{
 
     activateAutoClickers(){
         this.addDonuts(this.autoClickerCount);
+    }
+
+    addDonutMultipliers(numToAdd){
+        this.donutMultiplierCount += numToAdd;
+    }
+
+    buyDonutMultiplier(){
+        this.donutCount -= 10;
+        this.addDonutMultipliers(1);
     }
 
     isAffordable(cost){
