@@ -20,4 +20,19 @@ function buttonSetup(){
 function updateDonutCounter(){
   const donutCounter = document.querySelector('#donutCounter');
   donutCounter.innerText = donutMaker.getDonutCount();
+  updateItemButton('donutMultiplier');
+  updateItemButton('autoClicker');
+}
+
+function updateItemButton(item){
+  const itemButton = document.querySelector(`#${item}Button`);
+  const itemCost = document.querySelector(`#${item}Cost`);
+
+  itemCost.innerText = donutMaker.getItemCost(`${item}s`);
+  
+  if(donutMaker.getItemCost(`${item}s`) > donutMaker.getDonutCount()){
+    itemButton.disabled = 'disabled';
+  } else {
+    itemButton.disabled = '';
+  }
 }
