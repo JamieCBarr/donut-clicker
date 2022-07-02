@@ -28,9 +28,9 @@ function updateItemButton(item){
   const itemButton = document.querySelector(`#${item}Button`);
   const itemCost = document.querySelector(`#${item}Cost`);
 
-  itemCost.innerText = donutMaker.getItemCost(`${item}s`);
+  itemCost.innerText = donutMaker.getItemCost(item);
   
-  if(donutMaker.getItemCost(`${item}s`) > donutMaker.getDonutCount()){
+  if(donutMaker.getItemCost(item) > donutMaker.getDonutCount()){
     itemButton.disabled = 'disabled';
   } else {
     itemButton.disabled = '';

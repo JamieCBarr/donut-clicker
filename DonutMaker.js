@@ -2,8 +2,8 @@ class DonutMaker{
 
     constructor(){
         this.donutCount = 0.0;
-        this.autoClickers = new purchasableItem('autoClicker', 100, 0.1)
-        this.donutMultipliers = new purchasableItem('donutMultiplier', 10, 0.1)
+        this.autoClicker = new purchasableItem('autoClicker', 100, 0.1)
+        this.donutMultiplier = new purchasableItem('donutMultiplier', 10, 0.1)
     }
 
     addDonuts(numToAdd){
@@ -11,7 +11,7 @@ class DonutMaker{
     }
 
     clickDonuts(clicks){
-        let multiplier = Math.pow(1.2, this.getItemCount('donutMultipliers'));
+        let multiplier = Math.pow(1.2, this.getItemCount('donutMultiplier'));
         this.addDonuts(clicks * multiplier);
     }
 
@@ -44,7 +44,7 @@ class DonutMaker{
     }
 
     activateAutoClickers(){
-        this.clickDonuts(this.getItemCount('autoClickers'));
+        this.clickDonuts(this.getItemCount('autoClicker'));
     }
 }
 
