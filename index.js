@@ -54,6 +54,9 @@ function updateItemButton(item){
 }
 
 function updateMultiplierValue(){
-  const multiplierValue = document.querySelector('#multiplierValue');
-  multiplierValue.innerText = donutMaker.getMultiplierValue().toFixed(2) + ' donuts';
+  const multiplierValue = donutMaker.getMultiplierValue();
+  if (multiplierValue != 1){
+    const multiplierDisplay = document.querySelector('#multiplierValue');
+    multiplierDisplay.innerText = multiplierValue.toFixed(2) + ' donuts';
+  }
 }
