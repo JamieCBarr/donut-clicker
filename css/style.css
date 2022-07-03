@@ -1,0 +1,76 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5em;
+    box-sizing: border-box;
+    text-decoration: none;
+--header-bg-color: darkblue;
+--header-color: azure;
+--highlight-color: deeppink;
+--alert-bg-color: red;
+--alert-color: yellow;
+--bg-color-1: rgb(219, 129, 54);
+--bg-color-2: rgb(48, 19, 2);
+}
+
+header, header *{
+    background-color: var(--header-bg-color);
+    color: var(--header-color);
+    font-size: small;
+}
+
+header a:hover{
+    color: var(--highlight-color);
+    font-weight: bold;
+}
+
+body{
+    background: radial-gradient(circle, var(--bg-color-1), var(--bg-color-2));
+}
+
+h1{
+    font-size: 70px;
+    font-family:'Ewert', cursive;
+    color: var(--highlight-color)
+}
+
+.itemSection{
+    border: 5px;
+    border-style:dotted;
+    border-color: var(--highlight-color);
+}
+
+.itemButton{
+    background-color: var(--header-bg-color);
+    color: var(--header-color);
+}
+
+.itemCounter{
+    font-size: large;
+}
+
+#clickIndicator{
+    font-size:large;
+}
+
+#donutPerClick{
+    font-size: small;
+}
+
+#donutSection p{ 
+    font-size: x-large;
+    border-style:ridge;
+    border-radius: 30px;
+    border-color: var(--header-color);
+}
+
+#donutCounter, .itemCounter span{
+    font-weight: bold;
+    color: var(--highlight-color);
+}
+
+#resetButton{
+    background-color: var(--alert-bg-color);
+    color: var(--alert-color);
+    border-color: var(--alert-color);
+    font-size: large;
+}
