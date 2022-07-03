@@ -1,18 +1,20 @@
 import DonutMaker from "./DonutMaker";
 
-const donutMaker = new DonutMaker;
+let donutMaker = new DonutMaker;
 
 renderPage();
 
 function renderPage(){
   donutButtonSetup();
-  itemButtonSetup('donutMultiplier');
   itemButtonSetup('autoClicker');
+  itemButtonSetup('donutMultiplier')
+  resetButtonSetup();
+  runAutoClickers();
 }
 
 function donutButtonSetup(){
-  const donutBtn = document.querySelector('#donutButton');
-  donutBtn.addEventListener('click', ()=>{
+  const donutButton = document.querySelector('#donutButton');
+  donutButton.addEventListener('click', ()=>{
     donutMaker.clickDonuts(1);
     updateDonutCounter();
   });
@@ -26,6 +28,27 @@ function itemButtonSetup(item){
     updateItemCounter(item);
     updateMultiplierValue();
   });
+}
+
+function resetButtonSetup(){
+  const resetButton = document.querySelector('#resetButton');
+  resetButton.addEventListener('click', ()=>{
+    const confirmation = confirm('Are you sure you want to reset? You will lose all progress!');
+    if (confirmation){
+      donutMaker = new DonutMaker;
+      updateDonutCounter();
+      updateItemCounter('autoClicker');
+      updateItemCounter('donutMultiplier');
+      updateMultiplierValue();
+    }
+  });
+}
+
+function runAutoClickers(){
+  setInterval(()=>{
+    donutMaker.activateAutoClickers();
+    updateDonutCounter();
+  }, 1000)
 }
 
 function updateDonutCounter(){
@@ -43,9 +66,7 @@ function updateItemCounter(item){
 function updateItemButton(item){
   const itemButton = document.querySelector(`#${item}Button`);
   const itemCost = document.querySelector(`#${item}Cost`);
-
   itemCost.innerText = donutMaker.getItemCost(item);
-  
   if(donutMaker.getItemCost(item) > donutMaker.getDonutCount()){
     itemButton.disabled = 'disabled';
   } else {
@@ -55,8 +76,10 @@ function updateItemButton(item){
 
 function updateMultiplierValue(){
   const multiplierValue = donutMaker.getMultiplierValue();
+  const multiplierDisplay = document.querySelector('#multiplierValue');
   if (multiplierValue != 1){
-    const multiplierDisplay = document.querySelector('#multiplierValue');
     multiplierDisplay.innerText = multiplierValue.toFixed(2) + ' donuts';
+  }else{
+    multiplierDisplay.innerText = '1 donut';
   }
 }

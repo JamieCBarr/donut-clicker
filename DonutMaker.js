@@ -4,6 +4,7 @@ class DonutMaker{
         this.donutCount = 0.0;
         this.autoClicker = new purchasableItem('autoClicker', 100, 0.1)
         this.donutMultiplier = new purchasableItem('donutMultiplier', 10, 0.1)
+        this.items = ['autoClicker', 'donutMultiplier'];
     }
 
     addDonuts(numToAdd){

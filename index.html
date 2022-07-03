@@ -25,20 +25,23 @@
       </header>
 
       <main>
-        <section class="itemSection" id="autoClickerSection">
-          <p class="itemCounter">Auto Clickers: <span id="autoClickerCounter">0</span></p>
-          <button class="itemButton" id="autoClickerButton" disabled="disabled">Buy 1 Auto Clicker for <span id="autoClickerCost">100</span> donuts</button>
-        </section>
+        <div id="items">
+          <section class="itemSection" id="autoClickerSection">
+            <p class="itemCounter">Auto Clickers: <span id="autoClickerCounter">0</span></p>
+            <button class="itemButton" id="autoClickerButton" disabled="disabled">Buy 1 Auto Clicker for <span id="autoClickerCost">100</span> donuts</button>
+          </section>
 
-        <section class="itemSection" id="donutMultiplierSection">
-          <p class="itemCounter">Donut Multipliers: <span id="donutMultiplierCounter">0</span></p>
-          <button class="itemButton" id="donutMultiplierButton" disabled="disabled">Buy 1 Donut Multiplier for <span id="donutMultiplierCost">10</span> donuts</button>
-        </section>
+          <section class="itemSection" id="donutMultiplierSection">
+            <p class="itemCounter">Donut Multipliers: <span id="donutMultiplierCounter">0</span></p>
+            <button class="itemButton" id="donutMultiplierButton" disabled="disabled">Buy 1 Donut Multiplier for <span id="donutMultiplierCost">10</span> donuts</button>
+          </section>
+        </div>
 
         <section id="donutSection">
           <p>Donuts: <span id="donutCounter">0</span></p>
           <button id="donutButton">Click for Donuts (<span id="multiplierValue">1 donut</span> per click)</button>
         </section>  
+        <button id="resetButton">Reset!</button>
       </main>
     </div>
     <script src="./index.js"></script>
