@@ -1,13 +1,12 @@
 import DonutMaker from "./DonutMaker";
 
-let donutMaker = new DonutMaker;
+const donutMaker = new DonutMaker;
 
 renderPage();
 
 function renderPage(){
   donutButtonSetup();
-  itemButtonSetup('autoClicker');
-  itemButtonSetup('donutMultiplier')
+  donutMaker.items.forEach((item)=>itemButtonSetup(item));
   resetButtonSetup();
   runAutoClickers();
 }
@@ -35,10 +34,9 @@ function resetButtonSetup(){
   resetButton.addEventListener('click', ()=>{
     const confirmation = confirm('Are you sure you want to reset? You will lose all progress!');
     if (confirmation){
-      donutMaker = new DonutMaker;
+      donutMaker.reset();
       updateDonutCounter();
-      updateItemCounter('autoClicker');
-      updateItemCounter('donutMultiplier');
+      donutMaker.items.forEach((item)=>updateItemCounter(item));
       updateMultiplierValue();
     }
   });
@@ -54,8 +52,7 @@ function runAutoClickers(){
 function updateDonutCounter(){
   const donutCounter = document.querySelector('#donutCounter');
   donutCounter.innerText = donutMaker.getDonutCount();
-  updateItemButton('donutMultiplier');
-  updateItemButton('autoClicker');
+  donutMaker.items.forEach((item)=>updateItemButton(item));
 }
 
 function updateItemCounter(item){
