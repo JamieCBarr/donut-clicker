@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/layout.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ewert&display=swap" rel="stylesheet">
     <title>Donut Clicker</title>
   </head>
   <body>
@@ -27,6 +30,7 @@
       </header>
 
       <main>
+        <h1>Donut Clicker</h1>
         <div id="items">
           <section class="itemSection" id="autoClickerSection">
             <p class="itemCounter">Auto Clickers: <span id="autoClickerCounter">0</span></p>
@@ -40,8 +44,10 @@
         </div>
 
         <section id="donutSection">
+          <img src="./img/donut.gif" id="donutButton">
+          <label for="donutButton" id="clickIndicator">&uarr; Click for Donuts &uarr;</label>
+          <label for="donutButton" id="donutPerClick">(<span id="multiplierValue">1 donut</span> per click)</label>
           <p>Donuts: <span id="donutCounter">0</span></p>
-          <button id="donutButton">Click for Donuts (<span id="multiplierValue">1 donut</span> per click)</button>
         </section>  
         <button id="resetButton">Reset!</button>
       </main>
