@@ -31,6 +31,14 @@
 
       <main>
         <h1>Donut Clicker</h1>
+
+        <section id="donutSection">
+          <img src="./img/donut.gif" id="donutButton">
+          <label for="donutButton" id="clickIndicator">&uarr; Click for Donuts &uarr;</label>
+          <label for="donutButton" id="donutPerClick">(<span id="multiplierValue">1 donut</span> per click)</label>
+          <p>Donuts: <span id="donutCounter">0</span></p>
+        </section>  
+
         <div id="items">
           <section class="itemSection" id="autoClickerSection">
             <p class="itemCounter">Auto Clickers: <span id="autoClickerCounter">0</span></p>
@@ -43,12 +51,6 @@
           </section>
         </div>
 
-        <section id="donutSection">
-          <img src="./img/donut.gif" id="donutButton">
-          <label for="donutButton" id="clickIndicator">&uarr; Click for Donuts &uarr;</label>
-          <label for="donutButton" id="donutPerClick">(<span id="multiplierValue">1 donut</span> per click)</label>
-          <p>Donuts: <span id="donutCounter">0</span></p>
-        </section>  
         <button id="resetButton">Reset!</button>
       </main>
     </div>

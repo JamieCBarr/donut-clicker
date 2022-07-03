@@ -51,19 +51,19 @@ function runAutoClickers(){
 
 function updateDonutCounter(){
   const donutCounter = document.querySelector('#donutCounter');
-  donutCounter.innerText = donutMaker.getDonutCount();
+  donutCounter.innerText = formatNumber(donutMaker.getDonutCount());
   donutMaker.items.forEach((item)=>updateItemButton(item));
 }
 
 function updateItemCounter(item){
   const itemCounter = document.querySelector(`#${item}Counter`);
-  itemCounter.innerText = donutMaker.getItemCount(item);
+  itemCounter.innerText = formatNumber(donutMaker.getItemCount(item));
 }
 
 function updateItemButton(item){
   const itemButton = document.querySelector(`#${item}Button`);
   const itemCost = document.querySelector(`#${item}Cost`);
-  itemCost.innerText = donutMaker.getItemCost(item);
+  itemCost.innerText = formatNumber(donutMaker.getItemCost(item));
   if(donutMaker.getItemCost(item) > donutMaker.getDonutCount()){
     itemButton.disabled = 'disabled';
   } else {
@@ -75,8 +75,24 @@ function updateMultiplierValue(){
   const multiplierValue = donutMaker.getMultiplierValue();
   const multiplierDisplay = document.querySelector('#multiplierValue');
   if (multiplierValue != 1){
-    multiplierDisplay.innerText = multiplierValue.toFixed(2) + ' donuts';
+    multiplierDisplay.innerText = formatNumber(multiplierValue) + ' donuts';
   }else{
     multiplierDisplay.innerText = '1 donut';
   }
+}
+
+function formatNumber(num){
+  if (num < 100){
+    return num.toLocaleString(undefined, {maximumFractionDigits: 2});
+  }
+  if (num < 1000){
+    return num.toLocaleString(undefined, {maximumFractionDigits: 1});
+  }
+  if (num < 10000000000){
+    return num.toLocaleString(undefined, {maximumFractionDigits: 0});
+  }
+  if (num >= 10000000000){
+    return num.toPrecision(4);
+  }
+
 }
