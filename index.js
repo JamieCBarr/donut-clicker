@@ -24,6 +24,7 @@ function itemButtonSetup(item){
     donutMaker.buyItem(item);
     updateDonutCounter();
     updateItemCounter(item);
+    updateMultiplierValue();
   });
 }
 
@@ -50,4 +51,9 @@ function updateItemButton(item){
   } else {
     itemButton.disabled = '';
   }
+}
+
+function updateMultiplierValue(){
+  const multiplierValue = document.querySelector('#multiplierValue');
+  multiplierValue.innerText = donutMaker.getMultiplierValue().toFixed(2) + ' donuts';
 }

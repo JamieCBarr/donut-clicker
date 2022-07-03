@@ -11,8 +11,7 @@ class DonutMaker{
     }
 
     clickDonuts(clicks){
-        let multiplier = Math.pow(1.2, this.getItemCount('donutMultiplier'));
-        this.addDonuts(clicks * multiplier);
+        this.addDonuts(clicks * this.getMultiplierValue());
     }
 
     getDonutCount(){
@@ -45,6 +44,10 @@ class DonutMaker{
 
     activateAutoClickers(){
         this.clickDonuts(this.getItemCount('autoClicker'));
+    }
+
+    getMultiplierValue(){
+        return Math.pow(1.2, this.getItemCount('donutMultiplier'));
     }
 }
 
