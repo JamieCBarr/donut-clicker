@@ -5,15 +5,25 @@ const donutMaker = new DonutMaker;
 renderPage();
 
 function renderPage(){
-  buttonSetup();
+  donutButtonSetup();
+  itemButtonSetup('donutMultiplier');
+  itemButtonSetup('autoClicker');
 }
 
-function buttonSetup(){
+function donutButtonSetup(){
   const donutBtn = document.querySelector('#donutButton');
-
   donutBtn.addEventListener('click', ()=>{
     donutMaker.clickDonuts(1);
     updateDonutCounter();
+  });
+}
+
+function itemButtonSetup(item){
+  const itemButton = document.querySelector(`#${item}Button`);
+  itemButton.addEventListener('click', ()=>{
+    donutMaker.buyItem(item);
+    updateDonutCounter();
+    updateItemCounter(item);
   });
 }
 
@@ -22,6 +32,11 @@ function updateDonutCounter(){
   donutCounter.innerText = donutMaker.getDonutCount();
   updateItemButton('donutMultiplier');
   updateItemButton('autoClicker');
+}
+
+function updateItemCounter(item){
+  const itemCounter = document.querySelector(`#${item}Counter`);
+  itemCounter.innerText = donutMaker.getItemCount(item);
 }
 
 function updateItemButton(item){
