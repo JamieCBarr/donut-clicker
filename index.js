@@ -9,6 +9,7 @@ function renderPage(){
   donutMaker.items.forEach((item)=>itemButtonSetup(item));
   resetButtonSetup();
   runAutoClickers();
+  startClickStormCountdown();
 }
 
 function donutButtonSetup(){
@@ -46,7 +47,16 @@ function runAutoClickers(){
   setInterval(()=>{
     donutMaker.activateAutoClickers();
     updateDonutCounter();
-  }, 1000)
+  }, 1000);
+}
+
+function startClickStormCountdown(timeDelay = 0){
+  const minTime = timeDelay + 1000;
+  const maxTime = timeDelay + 5000;
+  const countdownTime = Math.floor(Math.random() * (maxTime - minTime) + minTime);
+  setTimeout(()=>{
+    displayClickStormActivator(countdownTime);
+  }, countdownTime);
 }
 
 function updateDonutCounter(){
@@ -79,6 +89,15 @@ function updateMultiplierValue(){
   }else{
     multiplierDisplay.innerText = '1 donut';
   }
+}
+
+function displayClickStormActivator(countdownTime){
+  console.log('ClickStorm!!!');
+  const container = document.querySelector('.container');
+  const clickStormActivator = document.createElement('button');
+  clickStormActivator.id = 'clickStormActivator';
+  clickStormActivator.innerText = 'Begin Donut Drop!';
+  container.appendChild(clickStormActivator);
 }
 
 function formatNumber(num){

@@ -42,6 +42,15 @@ h1{
 .itemButton{
     background-color: var(--header-bg-color);
     color: var(--header-color);
+    border-color: var(--header-color);
+    font-weight: bold;
+}
+
+.itemButton:disabled{
+    border-color: var(--header-bg-color);
+    color: gray;
+    font-style: italic;
+    text-decoration: line-through;
 }
 
 .itemCounter{
@@ -73,4 +82,12 @@ h1{
     color: var(--alert-color);
     border-color: var(--alert-color);
     font-size: large;
+}
+
+#clickStormActivator{
+    background-color: var(--header-bg-color);
+    font-size: large;
+    color: var(--header-color);
+    border-color: var(--header-color);
+    border-radius: 13px;
 }
