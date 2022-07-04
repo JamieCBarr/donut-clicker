@@ -126,8 +126,8 @@ function addClickStormButton(){
   newClickStormButton.className = 'clickStormButton';
   const clickValue = getRandIntBetween(10, 100);
   newClickStormButton.innerText = `x${clickValue}!`;
-  const xPos = getRandIntBetween(10,70);
-  const yPos = getRandIntBetween(20,70);
+  const xPos = getRandIntBetween(10,85);
+  const yPos = getRandIntBetween(10,80);
   newClickStormButton.style.left = `${xPos}%`;
   newClickStormButton.style.top = `${yPos}%`;
   container.appendChild(newClickStormButton);
