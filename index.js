@@ -110,7 +110,6 @@ function displayClickStormActivator(timeDelay){
 }
 
 function runClickStorm(){
-  const container = document.querySelector('.container');
   let timeOnTimer = 60000;
   while (timeOnTimer > 4000){
     const buttonDelay = getRandIntBetween(1000, 4000);
@@ -122,7 +121,19 @@ function runClickStorm(){
 }
 
 function addClickStormButton(){
-  console.log('New Button!');
+  const container = document.querySelector('.container');
+  const newClickStormButton = document.createElement('button');
+  newClickStormButton.className = 'clickStormButton';
+  const clickValue = getRandIntBetween(10, 100);
+  newClickStormButton.innerText = `x${clickValue}!`;
+  const xPos = getRandIntBetween(10,70);
+  const yPos = getRandIntBetween(20,70);
+  newClickStormButton.style.left = `${xPos}%`;
+  newClickStormButton.style.top = `${yPos}%`;
+  container.appendChild(newClickStormButton);
+  setTimeout(()=>{
+    container.removeChild(newClickStormButton);
+  }, 3000);
 }
 
 function getRandIntBetween(min, max){
