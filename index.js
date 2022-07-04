@@ -91,13 +91,21 @@ function updateMultiplierValue(){
   }
 }
 
-function displayClickStormActivator(countdownTime){
-  console.log('ClickStorm!!!');
+function displayClickStormActivator(timeDelay){
   const container = document.querySelector('.container');
   const clickStormActivator = document.createElement('button');
   clickStormActivator.id = 'clickStormActivator';
   clickStormActivator.innerText = 'Begin Donut Drop!';
   container.appendChild(clickStormActivator);
+  clickStormActivator.addEventListener('click', ()=>{
+    container.removeChild(clickStormActivator);
+    if(timeDelay > 540000){
+      timeDelay = 540000;
+    }
+    setTimeout(()=>{
+      startClickStormCountdown(timeDelay);
+    }, 60000);
+  });
 }
 
 function formatNumber(num){
