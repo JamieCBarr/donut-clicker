@@ -53,7 +53,7 @@ function runAutoClickers(){
 function startClickStormCountdown(timeDelay = 0){
   const minTime = timeDelay + 1000;
   const maxTime = timeDelay + 5000;
-  const countdownTime = Math.floor(Math.random() * (maxTime - minTime) + minTime);
+  const countdownTime = getRandIntBetween(minTime, maxTime);
   setTimeout(()=>{
     displayClickStormActivator(countdownTime);
   }, countdownTime);
@@ -105,7 +105,28 @@ function displayClickStormActivator(timeDelay){
     setTimeout(()=>{
       startClickStormCountdown(timeDelay);
     }, 60000);
+    runClickStorm();
   });
+}
+
+function runClickStorm(){
+  const container = document.querySelector('.container');
+  let timeOnTimer = 60000;
+  while (timeOnTimer > 4000){
+    const buttonDelay = getRandIntBetween(1000, 4000);
+    timeOnTimer -= buttonDelay;
+    setTimeout(()=>{
+      addClickStormButton();
+    }, timeOnTimer);
+  }
+}
+
+function addClickStormButton(){
+  console.log('New Button!');
+}
+
+function getRandIntBetween(min, max){
+  return Math.floor(Math.random() * (max + 1  - min) + min);
 }
 
 function formatNumber(num){
