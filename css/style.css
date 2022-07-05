@@ -113,6 +113,11 @@ h1{
     box-shadow: 3px 3px 10px 2px var(--bg-color-2);
 }
 
+.clickStormButton:hover{
+    border-style: solid;
+    border-width: 2px;
+}
+
 audio{
     display: none;
 }
