@@ -21,8 +21,10 @@ function donutButtonSetup(){
 }
 
 function itemButtonSetup(item){
+  const purchaseDing = document.querySelector('#purchaseDing');
   const itemButton = document.querySelector(`#${item}Button`);
   itemButton.addEventListener('click', ()=>{
+    purchaseDing.play();
     donutMaker.buyItem(item);
     updateDonutCounter();
     updateItemCounter(item);
@@ -97,13 +99,19 @@ function displayClickStormActivator(timeDelay){
   clickStormActivator.id = 'clickStormActivator';
   clickStormActivator.innerText = 'Begin Donut Drop!';
   container.appendChild(clickStormActivator);
+  const clickStormAlert = document.querySelector('#clickStormAlert');
+  clickStormAlert.play();
   clickStormActivator.addEventListener('click', ()=>{
     container.removeChild(clickStormActivator);
+    const timerSound = document.querySelector('#clock');
+    timerSound.play();
     if(timeDelay > 9 * donutMaker.getClickStormTime()){
       timeDelay = 9 * donutMaker.getClickStormTime();
     }
     setTimeout(()=>{
       startClickStormCountdown(timeDelay);
+      timerSound.pause();
+      timerSound.load();
     }, donutMaker.getClickStormTime());
     displayClickStormTimer();
     runClickStorm();
