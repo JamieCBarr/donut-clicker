@@ -30,7 +30,7 @@ body{
 h1{
     font-size: 70px;
     font-family:'Ewert', cursive;
-    color: var(--highlight-color)
+    color: var(--highlight-color);
 }
 
 .itemSection{
@@ -67,9 +67,10 @@ h1{
 
 #donutSection p{ 
     font-size: x-large;
-    border-style:ridge;
+    border-style: groove;
     border-radius: 30px;
     border-color: var(--header-color);
+    background-color: var(--header-color);
 }
 
 #donutCounter, .itemCounter span{
@@ -97,6 +98,7 @@ h1{
     border-width: 1px;
     border-color: var(--header-color);
     border-radius: 25px;
-    border-style: ridge;
+    border-style: outset;
     color: var(--header-color);
+    box-shadow: 3px 3px 10px 2px var(--bg-color-2);
 }
