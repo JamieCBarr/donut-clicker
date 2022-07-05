@@ -97,6 +97,8 @@ function displayClickStormActivator(timeDelay){
   clickStormActivator.id = 'clickStormActivator';
   clickStormActivator.innerText = 'Begin Donut Drop!';
   container.appendChild(clickStormActivator);
+  const clickStormAlert = document.querySelector('#clickStormAlert');
+  clickStormAlert.play();
   clickStormActivator.addEventListener('click', ()=>{
     container.removeChild(clickStormActivator);
     const timerSound = document.querySelector('#clock');
