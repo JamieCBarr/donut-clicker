@@ -85,6 +85,14 @@ h1{
     font-size: large;
 }
 
+.volumeButton{
+    display: inline;
+}
+
+.hidden{
+    display: none;
+}
+
 #clickStormActivator{
     background-color: var(--header-bg-color);
     font-size: large;

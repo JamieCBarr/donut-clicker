@@ -38,14 +38,19 @@ padding: 0.75em;
     padding: 14px 4px;
 }
 
-#resetButton{
-    margin-top: 3em;
-    width: 75px;
-}
-
 #donutButton{
     height: 200px;
     width: 200px;
+}
+
+#resetButton{
+    margin-top: 2em;
+    width: 75px;
+}
+
+.volumeButton{
+    margin-top: 1em;
+    width: 2.5em;
 }
 
 #clickStormActivator{
