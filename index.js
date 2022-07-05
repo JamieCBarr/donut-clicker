@@ -8,6 +8,7 @@ function renderPage(){
   donutButtonSetup();
   donutMaker.items.forEach((item)=>itemButtonSetup(item));
   resetButtonSetup();
+  volumeButtonSetup();
   runAutoClickers();
   startClickStormCountdown();
 }
@@ -44,6 +45,25 @@ function resetButtonSetup(){
     }
   });
 }
+
+function volumeButtonSetup(){
+  const volumeButtons = document.querySelectorAll('.volumeButton');
+  volumeButtons.forEach((volumeButton)=>{
+    volumeButton.addEventListener('click', ()=>toggleAudio());
+    });
+  }    
+
+
+function toggleAudio(){
+  const audio = document.querySelectorAll('audio');
+  const volumeButtons = document.querySelectorAll('.volumeButton');
+  audio.forEach((sound)=>{
+    sound.muted = !sound.muted;
+  });
+  volumeButtons.forEach((volumeButton)=>{
+    volumeButton.classList.toggle('hidden');
+  });
+}    
 
 function runAutoClickers(){
   setInterval(()=>{
