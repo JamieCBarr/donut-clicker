@@ -11,6 +11,7 @@ class DonutMaker{
         this.autoClicker = new PurchasableItem('autoClicker', 100, 0.1)
         this.donutMultiplier = new PurchasableItem('donutMultiplier', 10, 0.1)
         this.items = ['autoClicker', 'donutMultiplier'];
+        this.clickStormTime = 60; //Length of clickStorm in seconds
     }
 
     addDonuts(numToAdd){
@@ -43,6 +44,10 @@ class DonutMaker{
 
     getItemCostMult(item){
         return this[item].costMult;
+    }
+
+    getClickStormTime(){
+        return this.clickStormTime * 1000;
     }
 
     isItemAffordable(item){
