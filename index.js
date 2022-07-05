@@ -51,8 +51,8 @@ function runAutoClickers(){
 }
 
 function startClickStormCountdown(timeDelay = 0){
-  const minTime = timeDelay + 1000;
-  const maxTime = timeDelay + 5000;
+  const minTime = timeDelay + 45000;
+  const maxTime = timeDelay + 75000;
   const countdownTime = getRandIntBetween(minTime, maxTime);
   setTimeout(()=>{
     displayClickStormActivator(countdownTime);
@@ -104,13 +104,13 @@ function displayClickStormActivator(timeDelay){
     }
     setTimeout(()=>{
       startClickStormCountdown(timeDelay);
-    }, 60000);
+    }, donutMaker.getClickStormTime());
     runClickStorm();
   });
 }
 
 function runClickStorm(){
-  let timeOnTimer = 60000;
+  let timeOnTimer = donutMaker.getClickStormTime();
   while (timeOnTimer > 4000){
     const buttonDelay = getRandIntBetween(1000, 4000);
     timeOnTimer -= buttonDelay;
@@ -131,6 +131,11 @@ function addClickStormButton(){
   newClickStormButton.style.left = `${xPos}%`;
   newClickStormButton.style.top = `${yPos}%`;
   container.appendChild(newClickStormButton);
+  newClickStormButton.addEventListener('click', ()=>{
+    donutMaker.clickDonuts(clickValue);
+    updateDonutCounter();
+    container.removeChild(newClickStormButton);
+  });
   setTimeout(()=>{
     container.removeChild(newClickStormButton);
   }, 3000);
