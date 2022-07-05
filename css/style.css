@@ -23,6 +23,11 @@ header a:hover{
     font-weight: bold;
 }
 
+details span{
+    color: var(--highlight-color);
+    font-weight: bold;
+}
+
 body{
     background: radial-gradient(circle, var(--bg-color-1), var(--bg-color-2));
 }
