@@ -99,14 +99,31 @@ function displayClickStormActivator(timeDelay){
   container.appendChild(clickStormActivator);
   clickStormActivator.addEventListener('click', ()=>{
     container.removeChild(clickStormActivator);
-    if(timeDelay > 540000){
-      timeDelay = 540000;
+    if(timeDelay > 9 * donutMaker.getClickStormTime()){
+      timeDelay = 9 * donutMaker.getClickStormTime();
     }
     setTimeout(()=>{
       startClickStormCountdown(timeDelay);
     }, donutMaker.getClickStormTime());
+    displayClickStormTimer();
     runClickStorm();
   });
+}
+
+function displayClickStormTimer(){
+  const container = document.querySelector('.container');
+  const clickStormTimer = document.createElement('progress');
+  clickStormTimer.id = 'clickStormTimer';
+  clickStormTimer.max = donutMaker.getClickStormTime();
+  clickStormTimer.value = donutMaker.getClickStormTime();
+  container.appendChild(clickStormTimer);
+  const updateTimer = setInterval(()=>{
+    clickStormTimer.value -= 1000;
+  }, 1000);
+  setTimeout(()=>{
+    clearInterval(updateTimer);
+    container.removeChild(clickStormTimer);
+  }, donutMaker.getClickStormTime());
 }
 
 function runClickStorm(){
