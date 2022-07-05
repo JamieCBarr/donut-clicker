@@ -11,6 +11,10 @@ header details{
     width: 25%;
 }
 
+header details ul{
+    margin: 0;
+}
+
 main{
 display: flex;
 flex-direction: column;

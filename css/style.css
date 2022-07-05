@@ -23,6 +23,11 @@ header a:hover{
     font-weight: bold;
 }
 
+details span{
+    color: var(--highlight-color);
+    font-weight: bold;
+}
+
 body{
     background: radial-gradient(circle, var(--bg-color-1), var(--bg-color-2));
 }
@@ -76,6 +81,7 @@ h1{
 #donutCounter, .itemCounter span{
     font-weight: bold;
     color: var(--highlight-color);
+    text-shadow: 0 0 1px var(--header-color), 0 0 1px var(--header-color), 0 0 1px var(--header-color), 0 0 1px var(--header-color);
 }
 
 #resetButton{
@@ -110,6 +116,11 @@ h1{
     color: var(--header-color);
     text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
     box-shadow: 3px 3px 10px 2px var(--bg-color-2);
+}
+
+.clickStormButton:hover{
+    border-style: solid;
+    border-width: 2px;
 }
 
 audio{
