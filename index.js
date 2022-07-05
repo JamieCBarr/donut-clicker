@@ -99,11 +99,15 @@ function displayClickStormActivator(timeDelay){
   container.appendChild(clickStormActivator);
   clickStormActivator.addEventListener('click', ()=>{
     container.removeChild(clickStormActivator);
+    const timerSound = document.querySelector('#clock');
+    timerSound.play();
     if(timeDelay > 9 * donutMaker.getClickStormTime()){
       timeDelay = 9 * donutMaker.getClickStormTime();
     }
     setTimeout(()=>{
       startClickStormCountdown(timeDelay);
+      timerSound.pause();
+      timerSound.load();
     }, donutMaker.getClickStormTime());
     displayClickStormTimer();
     runClickStorm();

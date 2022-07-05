@@ -100,5 +100,10 @@ h1{
     border-radius: 25px;
     border-style: outset;
     color: var(--header-color);
+    text-shadow: 0 0 1px black, 0 0 1px black, 0 0 1px black, 0 0 1px black;
     box-shadow: 3px 3px 10px 2px var(--bg-color-2);
+}
+
+audio{
+    display: none;
 }
