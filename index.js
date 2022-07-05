@@ -21,8 +21,10 @@ function donutButtonSetup(){
 }
 
 function itemButtonSetup(item){
+  const purchaseDing = document.querySelector('#purchaseDing');
   const itemButton = document.querySelector(`#${item}Button`);
   itemButton.addEventListener('click', ()=>{
+    purchaseDing.play();
     donutMaker.buyItem(item);
     updateDonutCounter();
     updateItemCounter(item);
