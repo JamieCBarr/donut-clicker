@@ -18,3 +18,4 @@
 #### Requirement Adaptations
 
 - Donut Multiplier bonus of 1.2x quickly outpaces the 1.1x cost increase of the Donut Multipliers; reduced Donut Multiplier value to 1.15x and increased donut multiplier cost increase to 1.35x
+-Auto Clicker cost multiplier increased from 1.1x to 1.3x to bring it more in line with Donut Multipliers

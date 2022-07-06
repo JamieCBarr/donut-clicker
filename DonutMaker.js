@@ -8,7 +8,7 @@ class DonutMaker{
 
     reset(){
         this.donutCount = 0.0;
-        this.autoClicker = new PurchasableItem('autoClicker', 100, 0.1)
+        this.autoClicker = new PurchasableItem('autoClicker', 100, 0.3)
         this.donutMultiplier = new PurchasableItem('donutMultiplier', 10, 0.35)
         this.items = ['autoClicker', 'donutMultiplier'];
         this.clickStormTime = 60; //Length of clickStorm in seconds
