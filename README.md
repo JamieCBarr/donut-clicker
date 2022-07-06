@@ -15,3 +15,6 @@
 - `npm test` will run your tests
 - `npm start` will spin up the application
 
+#### Requirement Adaptations
+
+- Donut Multiplier bonus of 1.2x quickly outpaces the 1.1x cost increase of the Donut Multipliers; reduced Donut Multiplier value to 1.15x and increased donut multiplier cost increase to 1.35x

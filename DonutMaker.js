@@ -9,9 +9,10 @@ class DonutMaker{
     reset(){
         this.donutCount = 0.0;
         this.autoClicker = new PurchasableItem('autoClicker', 100, 0.1)
-        this.donutMultiplier = new PurchasableItem('donutMultiplier', 10, 0.1)
+        this.donutMultiplier = new PurchasableItem('donutMultiplier', 10, 0.35)
         this.items = ['autoClicker', 'donutMultiplier'];
         this.clickStormTime = 60; //Length of clickStorm in seconds
+        this.donutMultiplierValue = 1.15;
     }
 
     addDonuts(numToAdd){
@@ -59,7 +60,7 @@ class DonutMaker{
     }
 
     getMultiplierValue(){
-        return Math.pow(1.2, this.getItemCount('donutMultiplier'));
+        return Math.pow(this.donutMultiplierValue, this.getItemCount('donutMultiplier'));
     }
 }
 
