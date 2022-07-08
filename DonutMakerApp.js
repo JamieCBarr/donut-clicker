@@ -6,6 +6,7 @@ class DonutMakerApp {
 
     constructor() {
         this.donutMaker = new DonutMaker;
+        this.isStormActive = false;
     }
 
     renderPage() {
@@ -39,6 +40,7 @@ class DonutMakerApp {
 
     resetButtonSetup() {
         const resetButton = document.querySelector('#resetButton');
+        const resetChannel = new BroadcastChannel('reset-channel');
         resetButton.addEventListener('click', () => {
             const confirmation = confirm('Are you sure you want to reset? You will lose all progress!');
             if (confirmation) {
@@ -46,6 +48,8 @@ class DonutMakerApp {
                 this.updateDonutCounter();
                 this.donutMaker.items.forEach((item) => this.updateItemCounter(item));
                 this.updateMultiplierValue();
+                this.isStormActive = false;
+                resetChannel.postMessage('reset');
             }
         });
     }
@@ -77,8 +81,8 @@ class DonutMakerApp {
     }
 
     startClickStormCountdown(timeDelay = 0) {
-        const minTime = timeDelay + 45000;
-        const maxTime = timeDelay + 75000;
+        const minTime = timeDelay + 5000;
+        const maxTime = timeDelay + 7000;
         const countdownTime = this.getRandIntBetween(minTime, maxTime);
         setTimeout(() => {
             this.displayClickStormActivator(countdownTime);
@@ -127,6 +131,7 @@ class DonutMakerApp {
         clickStormAlert.play();
         clickStormActivator.addEventListener('click', () => {
             clickStormActivator.remove();
+            this.isStormActive = true;
             const timerSound = document.querySelector('#clock');
             timerSound.play();
             if (timeDelay > 9 * this.donutMaker.getClickStormTime()) {
@@ -139,6 +144,10 @@ class DonutMakerApp {
             }, this.donutMaker.getClickStormTime());
             this.displayClickStormTimer();
             this.runClickStorm();
+        });
+        const resetChannel = new BroadcastChannel('reset-channel');
+        resetChannel.addEventListener('message', event => {
+                clickStormActivator.remove();
         });
     }
 
