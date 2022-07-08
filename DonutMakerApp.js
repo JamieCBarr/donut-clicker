@@ -18,6 +18,8 @@ class DonutMakerApp {
         const eventChannel = new BroadcastChannel('event-channel');
         eventChannel.addEventListener('message', event => {
             if (event.data === 'clickStorm-milestone'){
+                const milestoneDing = document.querySelector('#milestoneDing');
+                milestoneDing.play();
                 this.startClickStormCountdown();
             }
         });  
@@ -96,7 +98,7 @@ class DonutMakerApp {
         eventChannel.addEventListener('message', event => {
             if (event.data === 'reset'){
                 wasReset = true;
-                eventChannel.close;
+                eventChannel.close();
             }
         });
         setTimeout(() => {
