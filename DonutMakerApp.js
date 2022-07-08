@@ -7,6 +7,7 @@ class DonutMakerApp {
     constructor() {
         this.donutMaker = new DonutMaker;
         this.isStormActive = false;
+        this.container = document.querySelector('.container');
     }
 
     renderPage() {
@@ -18,8 +19,7 @@ class DonutMakerApp {
         const eventChannel = new BroadcastChannel('event-channel');
         eventChannel.addEventListener('message', event => {
             if (event.data === 'clickStorm-milestone'){
-                const milestoneDing = document.querySelector('#milestoneDing');
-                milestoneDing.play();
+                this.playSound('milestoneDing');
                 this.startClickStormCountdown();
             }
         });  
@@ -35,10 +35,9 @@ class DonutMakerApp {
     }
 
     itemButtonSetup(item) {
-        const purchaseDing = document.querySelector('#purchaseDing');
         const itemButton = document.querySelector(`#${item}Button`);
         itemButton.addEventListener('click', () => {
-            purchaseDing.play();
+            this.playSound('purchaseDing');
             this.donutMaker.buyItem(item);
             this.updateDonutCounter();
             this.updateItemCounter(item);
@@ -145,19 +144,16 @@ class DonutMakerApp {
     }
 
     displayClickStormActivator(timeDelay) {
-        const container = document.querySelector('.container');
         const clickStormActivator = document.createElement('button');
         clickStormActivator.id = 'clickStormActivator';
         clickStormActivator.innerText = 'Begin Donut Drop!';
-        container.appendChild(clickStormActivator);
-        const clickStormAlert = document.querySelector('#clickStormAlert');
-        clickStormAlert.play();
+        this.container.appendChild(clickStormActivator);
+        this.playSound('clickStormAlert');
         let wasReset = false;
         clickStormActivator.addEventListener('click', () => {
             clickStormActivator.remove();
             this.isStormActive = true;
-            const timerSound = document.querySelector('#clock');
-            timerSound.play();
+            this.playSound('clock');
             if (timeDelay > 9 * this.donutMaker.getClickStormTime()) {
                 timeDelay = 9 * this.donutMaker.getClickStormTime();
             }
@@ -165,8 +161,7 @@ class DonutMakerApp {
                 if (!wasReset){
                     this.isStormActive = false;
                     this.startClickStormCountdown(timeDelay);
-                    timerSound.pause();
-                    timerSound.load();
+                    this.stopSound('clock');
                 }
             }, this.donutMaker.getClickStormTime());
             this.displayClickStormTimer();
@@ -182,12 +177,11 @@ class DonutMakerApp {
     }
 
     displayClickStormTimer() {
-        const container = document.querySelector('.container');
         const clickStormTimer = document.createElement('progress');
         clickStormTimer.id = 'clickStormTimer';
         clickStormTimer.max = this.donutMaker.getClickStormTime();
         clickStormTimer.value = this.donutMaker.getClickStormTime();
-        container.appendChild(clickStormTimer);
+        this.container.appendChild(clickStormTimer);
         const updateTimer = setInterval(() => {
             clickStormTimer.value -= 1000;
         }, 1000);
@@ -201,9 +195,7 @@ class DonutMakerApp {
                 clearInterval(updateTimer);    
                 clickStormTimer.remove();
                 this.isStormActive = false;
-                const timerSound = document.querySelector('#clock');
-                timerSound.pause();
-                timerSound.load();
+                this.stopSound('#clock');
             }    
         });
     }
@@ -229,7 +221,6 @@ class DonutMakerApp {
     }
 
     addClickStormButton() {
-        const container = document.querySelector('.container');
         const newClickStormButton = document.createElement('button');
         newClickStormButton.className = 'clickStormButton';
         const clickValue = this.getRandIntBetween(10, 100);
@@ -238,13 +229,12 @@ class DonutMakerApp {
         const yPos = this.getRandIntBetween(10, 80);
         newClickStormButton.style.left = `${xPos}%`;
         newClickStormButton.style.top = `${yPos}%`;
-        container.appendChild(newClickStormButton);
+        this.container.appendChild(newClickStormButton);
         newClickStormButton.addEventListener('click', () => {
-            const stormCrunch = document.querySelector('#stormCrunch');
-            stormCrunch.play();
+            this.playSound('stormCrunch');
             this.donutMaker.clickDonuts(clickValue);
             this.updateDonutCounter();
-            container.removeChild(newClickStormButton);
+            this.container.removeChild(newClickStormButton);
         });
         setTimeout(() => {
             newClickStormButton.remove();
@@ -255,6 +245,18 @@ class DonutMakerApp {
                 newClickStormButton.remove();
             }
         });    
+    }
+
+    playSound(soundToPlay){
+        const soundEffect = document.querySelector(`#${soundToPlay}`);
+        soundEffect.currentTime = 0;
+        soundEffect.play();
+    }
+
+    stopSound(soundToStop){
+        const soundEffect = document.querySelector(`#${soundToStop}`);
+        soundEffect.pause();
+        soundEffect.currentTime = 0;
     }
 
     getRandIntBetween(min, max) {
