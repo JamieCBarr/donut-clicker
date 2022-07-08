@@ -40,7 +40,6 @@ class DonutMakerApp {
 
     resetButtonSetup() {
         const resetButton = document.querySelector('#resetButton');
-        const resetChannel = new BroadcastChannel('reset-channel');
         resetButton.addEventListener('click', () => {
             const confirmation = confirm('Are you sure you want to reset? You will lose all progress!');
             if (confirmation) {
@@ -50,7 +49,8 @@ class DonutMakerApp {
                 this.updateMultiplierValue();
                 this.isStormActive = false;
                 this.startClickStormCountdown();
-                resetChannel.postMessage('reset');
+                const eventChannel = new BroadcastChannel('event-channel');
+                eventChannel.postMessage('reset');
             }
         });
     }
@@ -146,9 +146,11 @@ class DonutMakerApp {
             this.displayClickStormTimer();
             this.runClickStorm();
         });
-        const resetChannel = new BroadcastChannel('reset-channel');
-        resetChannel.addEventListener('message', event => {
+        const eventChannel = new BroadcastChannel('event-channel');
+        eventChannel.addEventListener('message', event => {
+            if (event.data === 'reset'){
                 clickStormActivator.remove();
+            }
         });
     }
 
@@ -166,14 +168,16 @@ class DonutMakerApp {
             clearInterval(updateTimer);
             clickStormTimer.remove();
         }, this.donutMaker.getClickStormTime());
-        const resetChannel = new BroadcastChannel('reset-channel');
-        resetChannel.addEventListener('message', event => {
-            clearInterval(updateTimer);    
-            clickStormTimer.remove();
-            const timerSound = document.querySelector('#clock');
-            timerSound.pause();
-            timerSound.load();
-
+        const eventChannel = new BroadcastChannel('event-channel');
+        eventChannel.addEventListener('message', event => {
+            if (event.data === 'reset'){
+                clearInterval(updateTimer);    
+                clickStormTimer.remove();
+                this.isStormActive = false;
+                const timerSound = document.querySelector('#clock');
+                timerSound.pause();
+                timerSound.load();
+            }    
         });
     }
 
@@ -183,7 +187,9 @@ class DonutMakerApp {
             const buttonDelay = this.getRandIntBetween(1000, 4000);
             timeOnTimer -= buttonDelay;
             setTimeout(() => {
-                this.addClickStormButton();
+                if (this.isStormActive === true){
+                    this.addClickStormButton();
+                }
             }, timeOnTimer);
         }
     }
@@ -207,6 +213,12 @@ class DonutMakerApp {
         setTimeout(() => {
             newClickStormButton.remove();
         }, 3000);
+        const eventChannel = new BroadcastChannel('event-channel');
+        eventChannel.addEventListener('message', event => {
+            if (event.data === 'reset'){
+                newClickStormButton.remove();
+            }
+        });    
     }
 
     getRandIntBetween(min, max) {
