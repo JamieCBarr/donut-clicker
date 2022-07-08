@@ -240,6 +240,8 @@ class DonutMakerApp {
         newClickStormButton.style.top = `${yPos}%`;
         container.appendChild(newClickStormButton);
         newClickStormButton.addEventListener('click', () => {
+            const stormCrunch = document.querySelector('#stormCrunch');
+            stormCrunch.play();
             this.donutMaker.clickDonuts(clickValue);
             this.updateDonutCounter();
             container.removeChild(newClickStormButton);
