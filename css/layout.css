@@ -1,4 +1,4 @@
-header{
+header {
     display: flex;
     justify-content: space-around;
     position: fixed;
@@ -7,89 +7,102 @@ header{
     width: 100%;
 }
 
-header details{
+header details {
     width: 25%;
 }
 
-header details ul{
+header details ul {
     margin: 0;
 }
 
-main{
-display: flex;
-flex-direction: column;
-align-items: center;
-}
-
-h1{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
-h1 p{
-    padding: 0 0.25em;
-}
-
-@media screen and (max-width : 677px){
-   h1 p{
-    margin: 0;
-   }
-}
-
-#items{
-    margin-top: 0.5em;
-    display: flex;
-    justify-content: center;
-}
-
-.itemSection{
-margin: 0em -0.15em;
-padding: 0.75em;
-}
-
-#donutSection{
+main {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#donutSection p{
+h1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+h1 span {
+    margin: 0.35em 0;
+    padding: 0 0.25em;
+}
+
+#items {
+    margin-top: 0.5em;
+    display: flex;
+    justify-content: center;
+}
+
+.itemSection {
+    margin: 0em -0.15em;
+    padding: 0.75em;
+}
+
+#donutSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#donutSection p {
     padding: 14px 4px;
 }
 
-#donutButton{
+#donutButton {
     height: 200px;
     width: 200px;
 }
 
-#resetButton{
+#resetButton {
     margin-top: 2em;
     width: 75px;
 }
 
-.volumeButton{
+.volumeButton {
     margin-top: 1em;
     width: 2.5em;
 }
 
-#clickStormActivator{
+#clickStormActivator {
     position: fixed;
-    top: 8.4em;
+    top: 8em;
     left: 40%;
     width: 20%;
 }
 
-#clickStormTimer{
+#clickStormTimer {
     position: fixed;
-    top: 9.9em;
+    top: 9.5em;
     left: 40%;
     width: 20%;
     height: 1.5em;
 }
 
-.clickStormButton{
+.clickStormButton {
     position: fixed;
     width: 3em;
     height: 3em;
+}
+
+@media screen and (max-width : 677px) {
+    h1 span {
+        margin: 0;
+    }
+
+    #clickStormActivator {
+        top: 12.4em;
+        left: 30%;
+        width: 40%;
+    }
+
+    #clickStormTimer {
+        top: 13.9em;
+        left: 30%;
+        width: 40%;
+    }
 }

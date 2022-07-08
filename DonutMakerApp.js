@@ -195,7 +195,7 @@ class DonutMakerApp {
                 clearInterval(updateTimer);    
                 clickStormTimer.remove();
                 this.isStormActive = false;
-                this.stopSound('#clock');
+                this.stopSound('clock');
             }    
         });
     }
