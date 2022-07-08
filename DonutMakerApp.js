@@ -15,15 +15,21 @@ class DonutMakerApp {
         this.resetButtonSetup();
         this.volumeButtonSetup();
         this.runAutoClickers();
-        this.startClickStormCountdown();
+        const eventChannel = new BroadcastChannel('event-channel');
+        eventChannel.addEventListener('message', event => {
+            if (event.data === 'clickStorm-milestone'){
+                this.startClickStormCountdown();
+            }
+        });  
     }
 
     donutButtonSetup() {
         const donutButton = document.querySelector('#donutButton');
         donutButton.addEventListener('click', () => {
+            const shouldCheckForMilestone = !this.donutMaker.isClickStormMilestoneReached();
             this.donutMaker.clickDonuts(1);
-            this.updateDonutCounter();
-        });
+            this.updateDonutCounter(shouldCheckForMilestone);
+        });    
     }
 
     itemButtonSetup(item) {
@@ -48,7 +54,6 @@ class DonutMakerApp {
                 this.donutMaker.items.forEach((item) => this.updateItemCounter(item));
                 this.updateMultiplierValue();
                 this.isStormActive = false;
-                this.startClickStormCountdown();
                 const eventChannel = new BroadcastChannel('event-channel');
                 eventChannel.postMessage('reset');
             }
@@ -76,24 +81,39 @@ class DonutMakerApp {
 
     runAutoClickers() {
         setInterval(() => {
+            const shouldCheckForMilestone = !this.donutMaker.isClickStormMilestoneReached();
             this.donutMaker.activateAutoClickers();
-            this.updateDonutCounter();
+            this.updateDonutCounter(shouldCheckForMilestone);
         }, 1000);
     }
 
     startClickStormCountdown(timeDelay = 0) {
-        const minTime = timeDelay + 5000;
-        const maxTime = timeDelay + 7000;
+        const minTime = timeDelay + 30000;
+        const maxTime = timeDelay + 60000;
         const countdownTime = this.getRandIntBetween(minTime, maxTime);
+        let wasReset = false;
+        const eventChannel = new BroadcastChannel('event-channel');
+        eventChannel.addEventListener('message', event => {
+            if (event.data === 'reset'){
+                wasReset = true;
+                eventChannel.close;
+            }
+        });
         setTimeout(() => {
-            this.displayClickStormActivator(countdownTime);
+            if (!wasReset){
+                this.displayClickStormActivator(countdownTime);
+            }
         }, countdownTime);
     }
 
-    updateDonutCounter() {
+    updateDonutCounter(shouldCheckForMilestone) {
         const donutCounter = document.querySelector('#donutCounter');
         donutCounter.innerText = this.formatNumber(this.donutMaker.getDonutCount());
         this.donutMaker.items.forEach((item) => this.updateItemButton(item));
+        if (shouldCheckForMilestone && this.donutMaker.isClickStormMilestoneReached()){
+            const eventChannel = new BroadcastChannel('event-channel');
+            eventChannel.postMessage('clickStorm-milestone');
+        }
     }
 
     updateItemCounter(item) {
@@ -130,6 +150,7 @@ class DonutMakerApp {
         container.appendChild(clickStormActivator);
         const clickStormAlert = document.querySelector('#clickStormAlert');
         clickStormAlert.play();
+        let wasReset = false;
         clickStormActivator.addEventListener('click', () => {
             clickStormActivator.remove();
             this.isStormActive = true;
@@ -139,9 +160,12 @@ class DonutMakerApp {
                 timeDelay = 9 * this.donutMaker.getClickStormTime();
             }
             setTimeout(() => {
-                this.startClickStormCountdown(timeDelay);
-                timerSound.pause();
-                timerSound.load();
+                if (!wasReset){
+                    this.isStormActive = false;
+                    this.startClickStormCountdown(timeDelay);
+                    timerSound.pause();
+                    timerSound.load();
+                }
             }, this.donutMaker.getClickStormTime());
             this.displayClickStormTimer();
             this.runClickStorm();
@@ -150,6 +174,7 @@ class DonutMakerApp {
         eventChannel.addEventListener('message', event => {
             if (event.data === 'reset'){
                 clickStormActivator.remove();
+                wasReset = true;
             }
         });
     }
@@ -183,15 +208,22 @@ class DonutMakerApp {
 
     runClickStorm() {
         let timeOnTimer = this.donutMaker.getClickStormTime();
+        let wasReset = false;
         while (timeOnTimer > 4000) {
             const buttonDelay = this.getRandIntBetween(1000, 4000);
             timeOnTimer -= buttonDelay;
             setTimeout(() => {
-                if (this.isStormActive === true){
+                if (!wasReset){
                     this.addClickStormButton();
                 }
             }, timeOnTimer);
         }
+        const eventChannel = new BroadcastChannel('event-channel');
+        eventChannel.addEventListener('message', event => {
+            if (event.data === 'reset'){
+                wasReset = true;
+            }    
+        });
     }
 
     addClickStormButton() {
