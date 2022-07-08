@@ -32,7 +32,7 @@ body{
     background: radial-gradient(circle, var(--bg-color-1), var(--bg-color-2));
 }
 
-h1 p{
+h1 span{
     font-size: 70px;
     font-family:'Ewert', cursive;
     color: var(--highlight-color);

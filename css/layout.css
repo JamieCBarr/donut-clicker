@@ -27,14 +27,9 @@ h1{
     justify-content: center;
 }
 
-h1 p{
+h1 span{
+    margin: 0.35em 0;
     padding: 0 0.25em;
-}
-
-@media screen and (max-width : 677px){
-   h1 p{
-    margin: 0;
-   }
 }
 
 #items{
@@ -74,15 +69,15 @@ padding: 0.75em;
 }
 
 #clickStormActivator{
-    position: fixed;
-    top: 8.4em;
+    position: absolute;
+    top: 8em;
     left: 40%;
     width: 20%;
 }
 
 #clickStormTimer{
     position: fixed;
-    top: 9.9em;
+    top: 9.5em;
     left: 40%;
     width: 20%;
     height: 1.5em;
@@ -93,3 +88,21 @@ padding: 0.75em;
     width: 3em;
     height: 3em;
 }
+
+@media screen and (max-width : 677px){
+    h1 span{
+     margin: 0;
+    }
+
+    #clickStormActivator{
+     top: 12.4em;
+     left: 30%;
+     width: 40%;
+    }
+    
+    #clickStormTimer{
+     top: 13.9em;
+     left: 30%;
+     width: 40%;
+    }
+ }
