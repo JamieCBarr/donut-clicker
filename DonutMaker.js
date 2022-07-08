@@ -8,14 +8,20 @@ class DonutMaker{
 
     reset(){
         this.donutCount = 0.0;
-        this.autoClicker = new PurchasableItem('autoClicker', 100, 0.1)
-        this.donutMultiplier = new PurchasableItem('donutMultiplier', 10, 0.1)
+        this.autoClicker = new PurchasableItem('autoClicker', 100, 0.3)
+        this.donutMultiplier = new PurchasableItem('donutMultiplier', 10, 0.35)
         this.items = ['autoClicker', 'donutMultiplier'];
+        this.milestones = [];
         this.clickStormTime = 60; //Length of clickStorm in seconds
+        this.clickStormMilestone = 50; //Minimum donuts needed to start first clickstorm
+        this.donutMultiplierValue = 1.15;
     }
 
     addDonuts(numToAdd){
         this.donutCount += numToAdd;
+        if (!this.isClickStormMilestoneReached() && this.donutCount >= this.clickStormMilestone){
+            this.milestones[this.clickStormMilestone] = true;
+        }
     }
 
     clickDonuts(clicks){
@@ -50,6 +56,12 @@ class DonutMaker{
         return this.clickStormTime * 1000;
     }
 
+    isClickStormMilestoneReached(){
+        if (this.milestones[this.clickStormMilestone] === true){
+            return true;
+        }else return false;
+    }
+
     isItemAffordable(item){
         return this[item].isAffordableFor(this.donutCount);
     }
@@ -59,7 +71,7 @@ class DonutMaker{
     }
 
     getMultiplierValue(){
-        return Math.pow(1.2, this.getItemCount('donutMultiplier'));
+        return Math.pow(this.donutMultiplierValue, this.getItemCount('donutMultiplier'));
     }
 }
 
