@@ -49,6 +49,7 @@ class DonutMakerApp {
                 this.donutMaker.items.forEach((item) => this.updateItemCounter(item));
                 this.updateMultiplierValue();
                 this.isStormActive = false;
+                this.startClickStormCountdown();
                 resetChannel.postMessage('reset');
             }
         });
@@ -165,6 +166,15 @@ class DonutMakerApp {
             clearInterval(updateTimer);
             clickStormTimer.remove();
         }, this.donutMaker.getClickStormTime());
+        const resetChannel = new BroadcastChannel('reset-channel');
+        resetChannel.addEventListener('message', event => {
+            clearInterval(updateTimer);    
+            clickStormTimer.remove();
+            const timerSound = document.querySelector('#clock');
+            timerSound.pause();
+            timerSound.load();
+
+        });
     }
 
     runClickStorm() {
