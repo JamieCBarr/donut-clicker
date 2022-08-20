@@ -1,4 +1,4 @@
-import PurchasableItem from "./PurchasableItem";
+import PurchasableItem from "./PurchasableItem.js";
 
 class DonutMaker{
 
