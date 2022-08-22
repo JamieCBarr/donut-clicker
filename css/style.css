@@ -93,6 +93,8 @@ h1 span{
 
 .volumeButton{
     display: inline;
+    font-size: x-large;
+    margin-bottom: -20px;
 }
 
 .hidden{
